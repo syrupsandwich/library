@@ -1,0 +1,14 @@
+body{
+  font-size: medium;
+}
+td, th{
+  background-color: #fff;
+}
+
+th{
+  padding: 0 1ch;
+}
+
+table{
+  background-color: black;
+}
