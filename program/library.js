@@ -35,3 +35,22 @@ myLibrary.push(theWayOfMen);
 let aMindForNumbers = new book('A Mind for Numbers', 'Barbara Oakley, Ph.D.', 332, 'read');
 aMindForNumbers.prototype = Object.create(book.prototype);
 myLibrary.push(aMindForNumbers);
+
+let myLibraryTable = document.querySelector('.shelf');
+
+myLibrary.forEach((element) => {
+  let tableRow = document.createElement('tr');
+  let titleCell = document.createElement('td');
+  titleCell.textContent = element.title;
+  tableRow.appendChild(titleCell);
+  let authorCell = document.createElement('td');
+  authorCell.textContent = element.author;
+  tableRow.appendChild(authorCell);
+  let lengthCell = document.createElement('td');
+  lengthCell.textContent = element.pages;
+  tableRow.appendChild(lengthCell);
+  let statusCell = document.createElement('td');
+  statusCell.textContent = element.status;
+  tableRow.appendChild(statusCell);
+  myLibraryTable.appendChild(tableRow);
+})
