@@ -1,14 +1,14 @@
 let myLibrary = [];
 
-function book(title, author, pages, status) {
+function book(title, author, length, status) {
   this.title = title;
   this.author = author;
-  this.pages = pages;
+  this.length = length;
   this.status = status;
 }
 
 book.prototype.info = function() {
-  return (`${this.title} by ${this.author}, ${this.pages} pages, ${this.status}`);
+  return (`${this.title} by ${this.author}, ${this.length} pages, ${this.status}`);
 }
 
 function addBookToLibrary(inputTitle, inputAuthor, inputPages, inputStatus) {
@@ -40,18 +40,13 @@ let myLibraryTable = document.querySelector('.shelf');
 
 myLibrary.forEach((element) => {
   let tableRow = document.createElement('tr');
-  let titleCell = document.createElement('td');
-  titleCell.textContent = element.title;
-  tableRow.appendChild(titleCell);
-  let authorCell = document.createElement('td');
-  authorCell.textContent = element.author;
-  tableRow.appendChild(authorCell);
-  let lengthCell = document.createElement('td');
-  lengthCell.textContent = element.pages;
-  tableRow.appendChild(lengthCell);
-  let statusCell = document.createElement('td');
-  statusCell.textContent = element.status;
-  tableRow.appendChild(statusCell);
+  for(prop in element){
+    if(tableRow.childElementCount < 4){
+      let cell = document.createElement('td');
+      cell.textContent = element[prop];
+      tableRow.appendChild(cell);
+    }
+  }
   myLibraryTable.appendChild(tableRow);
 })
 
@@ -68,22 +63,10 @@ addBookToListBtn.addEventListener('click', () => {createTableForm(new tableInput
 
 function createTableForm(element){
   let tableRow = document.createElement('tr');
-
-  let titleCell = document.createElement('td');
-  titleCell.appendChild(element.title);
-  tableRow.appendChild(titleCell);
-
-  let authorCell = document.createElement('td');
-  authorCell.appendChild(element.author);
-  tableRow.appendChild(authorCell);
-
-  let lengthCell = document.createElement('td');
-  lengthCell.appendChild(element.pages);
-  tableRow.appendChild(lengthCell);
-
-  let statusCell = document.createElement('td');
-  statusCell.appendChild(element.status);
-  tableRow.appendChild(statusCell);
-  
+  for(prop in element){
+    let cell = document.createElement('td');
+    cell.appendChild(document.createElement('input'));
+    tableRow.appendChild(cell);
+  }
   myLibraryTable.insertBefore(tableRow, myLibraryTable.children[3]);
 }
