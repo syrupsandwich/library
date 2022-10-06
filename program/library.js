@@ -54,3 +54,36 @@ myLibrary.forEach((element) => {
   tableRow.appendChild(statusCell);
   myLibraryTable.appendChild(tableRow);
 })
+
+let tableInput = function(){
+  this.title = document.createElement('input');
+  this.author = document.createElement('input');
+  this.pages = document.createElement('input');
+  this.status = document.createElement('input');
+}
+
+let addBookToListBtn = document.querySelector('.add-book');
+
+addBookToListBtn.addEventListener('click', () => {createTableForm(new tableInput())});
+
+function createTableForm(element){
+  let tableRow = document.createElement('tr');
+
+  let titleCell = document.createElement('td');
+  titleCell.appendChild(element.title);
+  tableRow.appendChild(titleCell);
+
+  let authorCell = document.createElement('td');
+  authorCell.appendChild(element.author);
+  tableRow.appendChild(authorCell);
+
+  let lengthCell = document.createElement('td');
+  lengthCell.appendChild(element.pages);
+  tableRow.appendChild(lengthCell);
+
+  let statusCell = document.createElement('td');
+  statusCell.appendChild(element.status);
+  tableRow.appendChild(statusCell);
+  
+  myLibraryTable.appendChild(tableRow);
+}

@@ -21,3 +21,20 @@ table{
   background-color: #e3e3e3;
   border-top: 4px solid white;
 }
+
+.inner-thead{
+  display: flex;
+  justify-content: space-between;
+}
+
+td>input{
+  width: calc(100% - 4px);
+  padding: 0;
+  border: 0;
+  outline: none;
+  font-size: inherit;
+}
+
+col.length{
+  width: 8ch;
+}
