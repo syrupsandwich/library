@@ -85,5 +85,5 @@ function createTableForm(element){
   statusCell.appendChild(element.status);
   tableRow.appendChild(statusCell);
   
-  myLibraryTable.appendChild(tableRow);
+  myLibraryTable.insertBefore(tableRow, myLibraryTable.children[3]);
 }

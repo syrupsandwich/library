@@ -35,6 +35,18 @@ td>input{
   font-size: inherit;
 }
 
+col.title{
+  min-width: 30ch;
+}
+
+col.author{
+  min-width: 28ch;
+}
+
 col.length{
   width: 8ch;
+}
+
+col.status{
+  width: 20ch;
 }
