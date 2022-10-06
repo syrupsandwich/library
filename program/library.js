@@ -51,10 +51,10 @@ myLibrary.forEach((element) => {
 })
 
 let tableInput = function(){
-  this.title = document.createElement('input');
-  this.author = document.createElement('input');
-  this.pages = document.createElement('input');
-  this.status = document.createElement('input');
+  this.inputTitle = document.createElement('input');
+  this.inputAuthor = document.createElement('input');
+  this.inputLength = document.createElement('input');
+  this.inputStatus = document.createElement('input');
 }
 
 let addBookBtn = document.querySelector('.add-book');
@@ -68,7 +68,9 @@ function createTableForm(element){
   let tableRow = document.createElement('tr');
   for(prop in element){
     let cell = document.createElement('td');
-    cell.appendChild(document.createElement('input'));
+    let input = document.createElement('input');
+    input.className = [`${prop}`]
+    cell.appendChild(input);
     tableRow.appendChild(cell);
   }
   myLibraryTable.insertBefore(tableRow, myLibraryTable.children[3]);
