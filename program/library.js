@@ -57,9 +57,12 @@ let tableInput = function(){
   this.status = document.createElement('input');
 }
 
-let addBookToListBtn = document.querySelector('.add-book');
+let addBookBtn = document.querySelector('.add-book');
 
-addBookToListBtn.addEventListener('click', () => {createTableForm(new tableInput())});
+addBookBtn.addEventListener('click', function(){
+  createTableForm(new tableInput());
+  addBookBtn.disabled = true;
+});
 
 function createTableForm(element){
   let tableRow = document.createElement('tr');
