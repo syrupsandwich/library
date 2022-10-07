@@ -60,11 +60,11 @@ let tableInput = function(){
 let addBookBtn = document.querySelector('.add-book');
 
 addBookBtn.addEventListener('click', function(){
-  createTableForm(new tableInput());
+  createFormInputs(new tableInput());
   addBookBtn.disabled = true;
 });
 
-function createTableForm(element){
+function createFormInputs(element){
   let tableRow = document.createElement('tr');
   for(prop in element){
     let cell = document.createElement('td');
