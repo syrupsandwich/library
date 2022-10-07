@@ -51,10 +51,10 @@ myLibrary.forEach((element) => {
 })
 
 let tableInput = function(){
-  this.inputTitle = document.createElement('input');
-  this.inputAuthor = document.createElement('input');
-  this.inputLength = document.createElement('input');
-  this.inputStatus = document.createElement('input');
+  this.textInputTitle = document.createElement('input');
+  this.textInputAuthor = document.createElement('input');
+  this.textInputLength = document.createElement('input');
+  this.textInputStatus = document.createElement('input');
 }
 
 let addBookBtn = document.querySelector('.add-book');
@@ -70,6 +70,7 @@ function createTableForm(element){
     let cell = document.createElement('td');
     let input = document.createElement('input');
     input.className = [`${prop}`]
+    input.setAttribute('type', `${prop.match(/[a-z]*(?=[A-Z])?/)}`)
     cell.appendChild(input);
     tableRow.appendChild(cell);
   }
