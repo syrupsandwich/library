@@ -58,10 +58,12 @@ let tableInput = function(){
 }
 
 let addBookBtn = document.querySelector('.add-book');
+let saveBookBtn = document.querySelector('.save');
 
 addBookBtn.addEventListener('click', function(){
   createFormInputs(new tableInput());
   addBookBtn.disabled = true;
+  saveBookBtn.disabled = false;
 });
 
 function createFormInputs(element){
@@ -71,6 +73,7 @@ function createFormInputs(element){
     let input = document.createElement('input');
     input.className = [`${prop}`]
     input.setAttribute('type', `${prop.match(/[a-z]*(?=[A-Z])?/)}`)
+    input.required = true;
     cell.appendChild(input);
     tableRow.appendChild(cell);
   }
