@@ -39,15 +39,7 @@ myLibrary.push(aMindForNumbers);
 let myLibraryTable = document.querySelector('.shelf');
 
 myLibrary.forEach((element) => {
-  let tableRow = document.createElement('tr');
-  for(prop in element){
-    if(tableRow.childElementCount < 4){
-      let cell = document.createElement('td');
-      cell.textContent = element[prop];
-      tableRow.appendChild(cell);
-    }
-  }
-  myLibraryTable.appendChild(tableRow);
+  createRow(element)
 })
 
 let tableInput = function(){
@@ -68,6 +60,7 @@ addBookBtn.addEventListener('click', function(){
 
 function createFormInputs(element){
   let tableRow = document.createElement('tr');
+  tableRow.className = 'input-row'
   for(prop in element){
     let cell = document.createElement('td');
     let input = document.createElement('input');
@@ -78,4 +71,34 @@ function createFormInputs(element){
     tableRow.appendChild(cell);
   }
   myLibraryTable.insertBefore(tableRow, myLibraryTable.children[3]);
+}
+
+saveBookBtn.addEventListener('click', function(){
+  let inputs = document.querySelectorAll('input');
+  let inputsArray = Array.from(inputs);
+  if (inputsArray.some((element) => element.value === '')){return};
+  let newBook = new book(`${inputs[0].value}`,`${inputs[1].value}`,`${inputs[2].value}`,`${inputs[3].value}`);
+  newBook.prototype = Object.create(book.prototype);
+  myLibrary.unshift(newBook);
+  createRow(newBook);
+  removeInputRow();
+  saveBookBtn.disabled = true;
+  addBookBtn.disabled = false;
+})
+
+function createRow(element) {
+  let tableRow = document.createElement('tr');
+  for(prop in element){
+    if(tableRow.childElementCount < 4){
+      let cell = document.createElement('td');
+      cell.textContent = element[prop];
+      tableRow.appendChild(cell);
+    }
+  }
+  myLibraryTable.insertBefore(tableRow, myLibraryTable.children[4]);
+}
+
+function removeInputRow() {
+  let inputRow = document.querySelector('.input-row');
+  inputRow.remove();
 }
