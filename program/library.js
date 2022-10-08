@@ -56,6 +56,7 @@ addBookBtn.addEventListener('click', function(){
   createFormInputs(new tableInput());
   addBookBtn.disabled = true;
   saveBookBtn.disabled = false;
+  editMode = true;
 });
 
 function createFormInputs(element){
@@ -77,18 +78,29 @@ saveBookBtn.addEventListener('click', function(){
   let inputs = document.querySelectorAll('input');
   let inputsArray = Array.from(inputs);
   if (inputsArray.some((element) => element.value === '')){return};
-  let newBook = new book(`${inputs[0].value}`,`${inputs[1].value}`,`${inputs[2].value}`,`${inputs[3].value}`);
-  newBook.prototype = Object.create(book.prototype);
-  myLibrary.unshift(newBook);
-  createRow(newBook);
+  if (bookIndexToEdit === ''){
+    let newBook = new book(`${inputs[0].value}`,`${inputs[1].value}`,`${inputs[2].value}`,`${inputs[3].value}`);
+    newBook.prototype = Object.create(book.prototype);
+    myLibrary.unshift(newBook);
+    createRow(newBook);
+  } else {
+    myLibrary[bookIndexToEdit].title = inputs[0].value;
+    myLibrary[bookIndexToEdit].author = inputs[1].value;
+    myLibrary[bookIndexToEdit].length = inputs[2].value;
+    myLibrary[bookIndexToEdit].status = inputs[3].value;
+    createRow(myLibrary[bookIndexToEdit]);
+    bookIndexToEdit = '';
+  }
   removeInputRow();
   saveBookBtn.disabled = true;
   addBookBtn.disabled = false;
+  editMode = false;
 })
 
 function createRow(element) {
   let tableRow = document.createElement('tr');
   for(prop in element){
+    if(tableRow.id === ''){ tableRow.id = myLibrary.indexOf(element) };
     if(tableRow.childElementCount < 4){
       let cell = document.createElement('td');
       cell.textContent = element[prop];
@@ -102,3 +114,24 @@ function removeInputRow() {
   let inputRow = document.querySelector('.input-row');
   inputRow.remove();
 }
+
+let bookIndexToEdit = '';
+let editMode = false;
+myLibraryTable.addEventListener('dblclick', function(e){
+  if(editMode === false){
+    editMode = true;
+    addBookBtn.disabled = true;
+    if (e.target.nodeName !== 'TD'){return};
+    let bookIndex = e.target.parentNode.id;
+    e.target.parentNode.className = 'input-row';
+    let cells = Array.from(e.target.parentNode.children);
+    cells.forEach(element => {
+      let text = element.textContent;
+      element.textContent = '';
+      element.appendChild(document.createElement('input'));
+      element.children[0].value = `${text}`;
+    });
+    bookIndexToEdit = bookIndex;
+    saveBookBtn.disabled = false;
+  };
+});
