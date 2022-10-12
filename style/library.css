@@ -22,7 +22,7 @@ table{
   border-top: 4px solid white;
 }
 
-.inner-thead{
+.controls{
   display: flex;
   justify-content: space-between;
 }

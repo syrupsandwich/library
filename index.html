@@ -9,7 +9,17 @@
 </head>
 <body>
   <form action="" method="post">
-    <table class="shelf">
+    <span class="controls">
+      <span class="table-name">Your Library </span>
+      <span>
+        <button type="button" class="save" title="save book" disabled>Save</button>
+        <button type="button" class="edit" title="edit book" disabled>Edit</button>
+        <button type="button" class="cancel" title="cancel edit" disabled>cancel</button>
+        <button type="button" class="add-book" title="add book">&plus;</button>
+        <button type="button" class="remove-book" title="remove book" disabled>&minus;</button>
+      </span>
+    </span>
+    <table>
       <colgroup>
         <col class="title">
         <col class="author">
@@ -17,23 +27,14 @@
         <col class="status">
       </colgroup>
       <thead>
-        <span class="inner-thead">
-          <span class="table-name">Your Library </span>
-          <span>
-            <button type="button" class="save" title="save book" disabled>Save</button>
-            <button type="button" class="edit" title="edit book" disabled>Edit</button>
-            <button type="button" class="cancel" title="cancel edit" disabled>cancel</button>
-            <button type="button" class="add-book" title="add book">&plus;</button>
-            <button type="button" class="remove-book" title="remove book" disabled>&minus;</button>
-          </span>
-        </span>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">Length</th>
+          <th scope="col">Status</th>
+        </tr>
       </thead>
-      <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Length</th>
-        <th>Status</th>
-      </tr>
+      <tbody class="shelf"></tbody>
     </table>
   </form>
 </body>

@@ -77,7 +77,7 @@ function createFormInputs(element){
     cell.appendChild(input);
     tableRow.appendChild(cell);
   }
-  myLibraryTable.insertBefore(tableRow, myLibraryTable.children[3]);
+  myLibraryTable.insertBefore(tableRow, myLibraryTable.children[0]);
 }
 
 saveBookBtn.addEventListener('click', function(){
@@ -115,7 +115,7 @@ function createRow(element) {
       tableRow.appendChild(cell);
     }
   }
-  myLibraryTable.insertBefore(tableRow, myLibraryTable.children[4]);
+  myLibraryTable.appendChild(tableRow);
 }
 
 function removeInputRow() {
