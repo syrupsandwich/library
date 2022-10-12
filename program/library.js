@@ -53,6 +53,12 @@ let addBookBtn = document.querySelector('.add-book');
 let saveBookBtn = document.querySelector('.save');
 
 addBookBtn.addEventListener('click', function(){
+  if (highlightedBookRow !== ''){
+    editBookBtn.disabled = true;
+    removeBookBtn.disabled = true
+    highlightedBookRow.style.fontWeight = '100';
+    highlightedBookRow = '';
+  }
   createFormInputs(new tableInput());
   addBookBtn.disabled = true;
   saveBookBtn.disabled = false;
@@ -120,15 +126,21 @@ function removeInputRow() {
 let bookIndexToEdit = '';
 let editMode = false;
 
-myLibraryTable.addEventListener('dblclick', function(e){
+let editBookBtn = document.querySelector('.edit');
+let cancelEditingBtn = document.querySelector('.cancel');
+
+editBookBtn.addEventListener('click', function(){
   removeBookBtn.disabled = true;
   if(editMode === false){
+    saveRowData();
     editMode = true;
+    editBookBtn.disabled = true;
+    cancelEditingBtn.disabled = false;
     addBookBtn.disabled = true;
-    if (e.target.nodeName !== 'TD'){return};
-    let bookIndex = e.target.parentNode.id;
-    e.target.parentNode.className = 'input-row';
-    let cells = Array.from(e.target.parentNode.children);
+    if (highlightedBookRow.children[0].nodeName !== 'TD'){return};
+    let bookIndex = highlightedBookRow.id;
+    highlightedBookRow.className = 'input-row';
+    let cells = Array.from(highlightedBookRow.children);
     cells.forEach(element => {
       let text = element.textContent;
       element.textContent = '';
@@ -140,9 +152,33 @@ myLibraryTable.addEventListener('dblclick', function(e){
   };
 });
 
+let backupRowData = [];
+
+function saveRowData() {
+  Array.from(highlightedBookRow.childNodes).forEach(cell => {
+    backupRowData.push(cell.textContent);
+  });
+};
+
+cancelEditingBtn.addEventListener('click', function(){
+  restoreRow();
+  highlightedBookRow = '';
+});
+
+function restoreRow() {
+  Array.from(highlightedBookRow.childNodes).forEach(cell => {
+    cell.children[0].remove();
+    cell.textContent = backupRowData.shift();
+  });
+  highlightedBookRow.style.fontWeight = '100';
+  editMode = false;
+  cancelEditingBtn.disabled = true;
+};
+
 let removeBookBtn = document.querySelector('.remove-book');
 
 removeBookBtn.addEventListener('click', function(){
+  editBookBtn.disabled = true;
   highlightedBookRow.remove();
   bookIndex = highlightedBookRow.id;
   removeBookBtn.disabled = true;
@@ -161,6 +197,7 @@ myLibraryTable.addEventListener('click', function(e){
   if(unselectSameRow(e)){return};
   removeBookBtn.disabled = false;
   e.target.parentNode.style.fontWeight = '900';
+  editBookBtn.disabled = false;
   highlightedBookRow = e.target.parentNode;
 });
 
@@ -178,6 +215,7 @@ function switchToNewSelection(e){
 function unselectSameRow(e){
   if (removeBookBtn.disabled === false){
     e.target.parentNode.style.fontWeight = '100';
+    editBookBtn.disabled = true;
     removeBookBtn.disabled = true;
     highlightedBookRow = '';
     return true;
