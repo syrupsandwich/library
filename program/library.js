@@ -163,6 +163,7 @@ function saveRowData() {
 cancelEditingBtn.addEventListener('click', function(){
   restoreRow();
   highlightedBookRow = '';
+  saveBookBtn.disabled = true;
 });
 
 function restoreRow() {
