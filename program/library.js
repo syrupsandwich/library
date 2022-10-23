@@ -155,6 +155,7 @@ editBookBtn.addEventListener('click', function(){
 let backupRowData = [];
 
 function saveRowData() {
+  backupRowData = [];
   Array.from(highlightedBookRow.childNodes).forEach(cell => {
     backupRowData.push(cell.textContent);
   });
