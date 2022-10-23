@@ -98,6 +98,8 @@ saveBookBtn.addEventListener('click', function(){
     createRow(myLibrary[bookIndexToEdit]);
     bookIndexToEdit = '';
   }
+  cancelEditingBtn.disabled = true;
+  highlightedBookRow = '';
   removeInputRow();
   saveBookBtn.disabled = true;
   addBookBtn.disabled = false;
@@ -165,6 +167,7 @@ cancelEditingBtn.addEventListener('click', function(){
   restoreRow();
   highlightedBookRow = '';
   saveBookBtn.disabled = true;
+  addBookBtn.disabled = false;
 });
 
 function restoreRow() {
