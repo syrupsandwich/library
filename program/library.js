@@ -63,6 +63,7 @@ addBookBtn.addEventListener('click', function(){
   addBookBtn.disabled = true;
   saveBookBtn.disabled = false;
   editMode = true;
+  bookIndexToEdit = '';
 });
 
 function createFormInputs(element){
