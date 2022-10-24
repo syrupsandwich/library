@@ -55,13 +55,14 @@ let saveBookBtn = document.querySelector('.save');
 addBookBtn.addEventListener('click', function(){
   if (highlightedBookRow !== ''){
     editBookBtn.disabled = true;
-    removeBookBtn.disabled = true
+    removeBookBtn.disabled = true;
     highlightedBookRow.classList.remove('selected');
     highlightedBookRow = '';
   }
   createFormInputs(new tableInput());
   addBookBtn.disabled = true;
   saveBookBtn.disabled = false;
+  cancelEditingBtn.disabled = false;
   editMode = true;
   bookIndexToEdit = '';
 });
@@ -172,10 +173,16 @@ function saveRowData() {
 };
 
 cancelEditingBtn.addEventListener('click', function(){
+  if(highlightedBookRow === ''){
+    myLibraryTable.children[0].remove();
+  } else {
   restoreRow();
+  }
   highlightedBookRow = '';
   saveBookBtn.disabled = true;
   addBookBtn.disabled = false;
+  editMode = false;
+  cancelEditingBtn.disabled = true;
 });
 
 function restoreRow() {
@@ -184,7 +191,6 @@ function restoreRow() {
     cell.textContent = backupRowData.shift();
   });
   highlightedBookRow.classList.remove('selected');
-  editMode = false;
   cancelEditingBtn.disabled = true;
 };
 
