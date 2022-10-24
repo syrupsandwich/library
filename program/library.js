@@ -56,7 +56,7 @@ addBookBtn.addEventListener('click', function(){
   if (highlightedBookRow !== ''){
     editBookBtn.disabled = true;
     removeBookBtn.disabled = true
-    highlightedBookRow.style.fontWeight = '100';
+    highlightedBookRow.classList.remove('selected');
     highlightedBookRow = '';
   }
   createFormInputs(new tableInput());
@@ -94,7 +94,7 @@ saveBookBtn.addEventListener('click', function(){
   } else {
     updateLibraryBook(inputs);
     replaceInputs(inputsArray);
-    document.getElementById(`${bookIndexToEdit}`).style.fontWeight = '100';
+    document.getElementById(`${bookIndexToEdit}`).classList.remove('selected');
     bookIndexToEdit = '';
   }
   cancelEditingBtn.disabled = true;
@@ -183,7 +183,7 @@ function restoreRow() {
     cell.children[0].remove();
     cell.textContent = backupRowData.shift();
   });
-  highlightedBookRow.style.fontWeight = '100';
+  highlightedBookRow.classList.remove('selected');
   editMode = false;
   cancelEditingBtn.disabled = true;
 };
@@ -209,15 +209,15 @@ myLibraryTable.addEventListener('click', function(e){
   if(switchToNewSelection(e)){return};
   if(unselectSameRow(e)){return};
   removeBookBtn.disabled = false;
-  e.target.parentNode.style.fontWeight = '900';
+  e.target.parentNode.classList.add('selected');
   editBookBtn.disabled = false;
   highlightedBookRow = e.target.parentNode;
 });
 
 function switchToNewSelection(e){
   if(highlightedBookRow !== '' && e.target.parentNode !== highlightedBookRow){
-    highlightedBookRow.style.fontWeight = '100';
-    e.target.parentNode.style.fontWeight = '900';
+    highlightedBookRow.classList.remove('selected');
+    e.target.parentNode.classList.add('selected');
     highlightedBookRow = e.target.parentNode;
     return true;
   } else {
@@ -227,7 +227,7 @@ function switchToNewSelection(e){
 
 function unselectSameRow(e){
   if (removeBookBtn.disabled === false){
-    e.target.parentNode.style.fontWeight = '100';
+    e.target.parentNode.classList.remove('selected');
     editBookBtn.disabled = true;
     removeBookBtn.disabled = true;
     highlightedBookRow = '';

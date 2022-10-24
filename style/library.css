@@ -20,6 +20,7 @@ text-align: start;
 table{
   background-color: #e3e3e3;
   border-top: 4px solid white;
+  padding: 4px;
 }
 
 .controls{
@@ -49,4 +50,8 @@ col.length{
 
 col.status{
   width: 20ch;
+}
+
+.selected{
+  box-shadow: cornflowerblue 4px 0px 0px 2px, cornflowerblue -4px 0px 0px 2px;
 }
