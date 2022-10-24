@@ -88,8 +88,7 @@ saveBookBtn.addEventListener('click', function(){
   if (bookIndexToEdit === ''){
     let newBook = new book(`${inputs[0].value}`,`${inputs[1].value}`,`${inputs[2].value}`,`${inputs[3].value}`);
     newBook.prototype = Object.create(book.prototype);
-    myLibrary.unshift(newBook);
-    incrementEachRowId();
+    myLibrary.push(newBook);
     createRow(newBook);
     inputs[0].parentNode.parentNode.remove();
   } else {
@@ -124,8 +123,8 @@ function replaceInputs(inputsArray){
 
 function createRow(element) {
   let tableRow = document.createElement('tr');
+  tableRow.id = myLibrary.indexOf(element);
   for(prop in element){
-    if(tableRow.id === ''){ tableRow.id = myLibrary.indexOf(element) };
     if(tableRow.childElementCount < 4){
       let cell = document.createElement('td');
       cell.textContent = element[prop];
@@ -260,15 +259,6 @@ function decrementEachRowId(){
   rows.forEach(function(row){
     if(row.nodeName === 'TR' && +row.id > bookIndex){
       row.id = `${+row.id - 1}`;
-    };
-  });
-};
-
-function incrementEachRowId(){
-  let rows = Array.from(myLibraryTable.childNodes);
-  rows.forEach(function(row){
-    if(row.nodeName === 'TR'){
-      row.id = `${+row.id + 1}`;
     };
   });
 };
