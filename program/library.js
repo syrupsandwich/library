@@ -68,7 +68,6 @@ addBookBtn.addEventListener('click', function(){
 
 function createFormInputs(element){
   let tableRow = document.createElement('tr');
-  tableRow.className = 'input-row';
   for(prop in element){
     let cell = document.createElement('td');
     let input = document.createElement('input');
@@ -91,6 +90,8 @@ saveBookBtn.addEventListener('click', function(){
     myLibrary.unshift(newBook);
     incrementEachRowId();
     createRow(newBook);
+    // removeInputRow();
+    inputs[0].parentNode.parentNode.remove();
   } else {
     myLibrary[bookIndexToEdit].title = inputs[0].value;
     myLibrary[bookIndexToEdit].author = inputs[1].value;
@@ -101,7 +102,6 @@ saveBookBtn.addEventListener('click', function(){
   }
   cancelEditingBtn.disabled = true;
   highlightedBookRow = '';
-  removeInputRow();
   saveBookBtn.disabled = true;
   addBookBtn.disabled = false;
   editMode = false;
@@ -121,11 +121,6 @@ function createRow(element) {
   myLibraryTable.appendChild(tableRow);
 }
 
-function removeInputRow() {
-  let inputRow = document.querySelector('.input-row');
-  inputRow.remove();
-}
-
 let bookIndexToEdit = '';
 let editMode = false;
 
@@ -142,7 +137,6 @@ editBookBtn.addEventListener('click', function(){
     addBookBtn.disabled = true;
     if (highlightedBookRow.children[0].nodeName !== 'TD'){return};
     let bookIndex = highlightedBookRow.id;
-    highlightedBookRow.className = 'input-row';
     let cells = Array.from(highlightedBookRow.children);
     cells.forEach(element => {
       let text = element.textContent;
