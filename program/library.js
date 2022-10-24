@@ -90,14 +90,11 @@ saveBookBtn.addEventListener('click', function(){
     myLibrary.unshift(newBook);
     incrementEachRowId();
     createRow(newBook);
-    // removeInputRow();
     inputs[0].parentNode.parentNode.remove();
   } else {
-    myLibrary[bookIndexToEdit].title = inputs[0].value;
-    myLibrary[bookIndexToEdit].author = inputs[1].value;
-    myLibrary[bookIndexToEdit].length = inputs[2].value;
-    myLibrary[bookIndexToEdit].status = inputs[3].value;
-    createRow(myLibrary[bookIndexToEdit]);
+    updateLibraryBook(inputs);
+    replaceInputs(inputsArray);
+    document.getElementById(`${bookIndexToEdit}`).style.fontWeight = '100';
     bookIndexToEdit = '';
   }
   cancelEditingBtn.disabled = true;
@@ -107,6 +104,22 @@ saveBookBtn.addEventListener('click', function(){
   editMode = false;
   checkIndexSync();
 })
+
+function updateLibraryBook(inputs){
+  myLibrary[bookIndexToEdit].title = inputs[0].value;
+  myLibrary[bookIndexToEdit].author = inputs[1].value;
+  myLibrary[bookIndexToEdit].length = inputs[2].value;
+  myLibrary[bookIndexToEdit].status = inputs[3].value;
+};
+
+function replaceInputs(inputsArray){
+  for(let i = 0; i < inputsArray.length; i++){
+    let input = inputsArray[i].value;
+    let inputContainer = inputsArray[i].parentNode;
+    inputContainer.children[0].remove();
+    inputContainer.textContent = input;
+  }
+};
 
 function createRow(element) {
   let tableRow = document.createElement('tr');
