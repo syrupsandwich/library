@@ -262,3 +262,11 @@ function decrementEachRowId(){
     };
   });
 };
+
+removeBookBtn.addEventListener('mouseover', function(){
+  highlightedBookRow.style.textDecoration = 'line-through';
+});
+
+removeBookBtn.addEventListener('mouseleave', function(){
+  highlightedBookRow.style.textDecoration = 'none';
+});
