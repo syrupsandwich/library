@@ -64,7 +64,7 @@ addBookBtn.addEventListener('click', function(){
   saveBookBtn.disabled = false;
   cancelEditingBtn.disabled = false;
   editMode = true;
-  bookIndexToEdit = '';
+  bookIndex = '';
 });
 
 function createFormInputs(element){
@@ -85,7 +85,7 @@ saveBookBtn.addEventListener('click', function(){
   let inputs = document.querySelectorAll('input');
   let inputsArray = Array.from(inputs);
   if (inputsArray.some((element) => element.value === '')){return};
-  if (bookIndexToEdit === ''){
+  if (bookIndex === ''){
     let newBook = new book(`${inputs[0].value}`,`${inputs[1].value}`,`${inputs[2].value}`,`${inputs[3].value}`);
     newBook.prototype = Object.create(book.prototype);
     myLibrary.push(newBook);
@@ -94,8 +94,8 @@ saveBookBtn.addEventListener('click', function(){
   } else {
     updateLibraryBook(inputs);
     replaceInputs(inputsArray);
-    document.getElementById(`${bookIndexToEdit}`).classList.remove('selected');
-    bookIndexToEdit = '';
+    document.getElementById(`${bookIndex}`).classList.remove('selected');
+    bookIndex = '';
   }
   cancelEditingBtn.disabled = true;
   highlightedBookRow = '';
@@ -106,10 +106,10 @@ saveBookBtn.addEventListener('click', function(){
 })
 
 function updateLibraryBook(inputs){
-  myLibrary[bookIndexToEdit].title = inputs[0].value;
-  myLibrary[bookIndexToEdit].author = inputs[1].value;
-  myLibrary[bookIndexToEdit].length = inputs[2].value;
-  myLibrary[bookIndexToEdit].status = inputs[3].value;
+  myLibrary[bookIndex].title = inputs[0].value;
+  myLibrary[bookIndex].author = inputs[1].value;
+  myLibrary[bookIndex].length = inputs[2].value;
+  myLibrary[bookIndex].status = inputs[3].value;
 };
 
 function replaceInputs(inputsArray){
@@ -134,7 +134,7 @@ function createRow(element) {
   myLibraryTable.appendChild(tableRow);
 }
 
-let bookIndexToEdit = '';
+let bookIndex = '';
 let editMode = false;
 
 let editBookBtn = document.querySelector('.edit');
@@ -149,7 +149,7 @@ editBookBtn.addEventListener('click', function(){
     cancelEditingBtn.disabled = false;
     addBookBtn.disabled = true;
     if (highlightedBookRow.children[0].nodeName !== 'TD'){return};
-    let bookIndex = highlightedBookRow.id;
+    bookIndex = highlightedBookRow.id;
     let cells = Array.from(highlightedBookRow.children);
     cells.forEach(element => {
       let text = element.textContent;
@@ -157,7 +157,7 @@ editBookBtn.addEventListener('click', function(){
       element.appendChild(document.createElement('input'));
       element.children[0].value = `${text}`;
     });
-    bookIndexToEdit = bookIndex;
+    bookIndex = bookIndex;
     saveBookBtn.disabled = false;
   };
 });
