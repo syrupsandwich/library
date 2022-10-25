@@ -67,3 +67,17 @@ col.status{
 .selected{
   box-shadow: cornflowerblue 4px 0px 0px 2px, cornflowerblue -4px 0px 0px 2px;
 }
+
+footer{
+  text-align: center;
+  color: gray;
+  padding: 2px;
+}
+
+footer>p{
+  margin: 0;
+}
+
+a{
+  color: cornflowerblue;
+}
